@@ -7,14 +7,7 @@ window.onload = function () {
     var circuloGanados = 0;
 
     var obtenerCantidadSeleccionados = function () {
-        var count=0;
-        for (var i = 0; i < arrayTds.length; i++) {
-            var td = arrayTds[i];
-            if (td.classList.contains("activo")) {
-                count++;
-            }
-        }
-        return count;
+        return document.getElementsByClassName("activo").length;
     };
 
     var cambiarTd = function (td) {
@@ -33,16 +26,7 @@ window.onload = function () {
 
     var validarGanador = function () {
         var empate = true;
-        var arrayCombinacionesGanadores = [
-               [0, 1, 2],
-               [3, 4, 5],
-               [6, 7, 8],
-               [0, 3, 6],
-               [1, 4, 7],
-               [2, 5, 8],
-               [0, 4, 8],
-               [2, 4, 6]
-        ];
+        var arrayCombinacionesGanadores = [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]];
         for (var i = 0; i < arrayCombinacionesGanadores.length; i++) {
             var arrayCombinacion = arrayCombinacionesGanadores[i];
             var td1 = document.getElementById(arrayCombinacion[0]);
@@ -52,26 +36,25 @@ window.onload = function () {
                 alert("Ha ganado el jugador que utiliza la X!!!!");
                 equisGanados++;
                 document.getElementById("estadistica").innerHTML = "Ganados X = " + equisGanados + "; Ganados O = " + circuloGanados;
-                reiniciarJuego();
+                reiniciar();
                 empate = false;
             }
             if (td1.classList.contains("circulo") && td2.classList.contains("circulo") && td3.classList.contains("circulo")) {
                 alert("Ha ganado el jugador que utiliza los O!!!!");
                 circuloGanados++;
                 document.getElementById("estadistica").innerHTML = "Ganados X = " + equisGanados + "; Ganados O = " + circuloGanados;
-                reiniciarJuego();
+                reiniciar();
                 empate = false;
             }
         }
 
-        var cantidadActivos = document.getElementsByClassName("activo").length;
-        if (cantidadActivos == 9 && empate) {
+        if (obtenerCantidadSeleccionados() == 9 && empate) {
             alert("Empate");
-            reiniciarJuego();
+            reiniciar();
         }
     };
 
-    var reiniciarJuego = function () {
+    var reiniciar = function () {
         for (var i = 0; i < arrayTds.length; i++) {
             var td = arrayTds[i];
             td.classList.remove("activo");
@@ -81,20 +64,24 @@ window.onload = function () {
         }
     };
     
-    for (var i = 0; i < arrayTds.length; i++) {
-        var td = arrayTds[i];
-        td.addEventListener("click", function () {
-            cambiarTd(this);
-            validarGanador();
-        });
-    }
+    var inicializar = function () {
+        for (var i = 0; i < arrayTds.length; i++) {
+            var td = arrayTds[i];
+            td.addEventListener("click", function () {
+                cambiarTd(this);
+                validarGanador();
+            });
+        }
 
-    var btnReiniciar = document.getElementById("btnReiniciar");
-    btnReiniciar.addEventListener("click", function () {
-        reiniciarJuego();
-        equisGanados = 0;
-        circuloGanados = 0;
-        document.getElementById("estadistica").innerHTML = "Ganados X = " + equisGanados + "; Ganados O = " + circuloGanados;
-    });
+        var btnReiniciar = document.getElementById("btnReiniciar");
+        btnReiniciar.addEventListener("click", function () {
+            reiniciar();
+            equisGanados = 0;
+            circuloGanados = 0;
+            document.getElementById("estadistica").innerHTML = "Ganados X = " + equisGanados + "; Ganados O = " + circuloGanados;
+        });
+    };
+
+    inicializar();
 
 };
