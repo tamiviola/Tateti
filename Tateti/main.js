@@ -15,11 +15,11 @@ window.onload = function () {
             td.classList.add("activo");
             if (obtenerCantidadSeleccionados() % 2 == 0) {
                 td.classList.add("circulo");
-                td.innerHTML = "<img src='/imagenes/Circulo.png' />";
+                td.innerHTML = "<img src='/imagenes/Circulo.jpg' />";
             }
             else {
                 td.classList.add("equis");
-                td.innerHTML = "<img src='/imagenes/X.png' />";
+                td.innerHTML = "<img src='/imagenes/Equis.jpg' />";
             }
         }
     };
@@ -57,9 +57,7 @@ window.onload = function () {
     var reiniciar = function () {
         for (var i = 0; i < arrayTds.length; i++) {
             var td = arrayTds[i];
-            td.classList.remove("activo");
-            td.classList.remove("equis");
-            td.classList.remove("circulo");
+            td.className = "";
             td.innerHTML = "";
         }
     };

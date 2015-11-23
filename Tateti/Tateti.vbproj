@@ -81,8 +81,8 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="imagenes\Circulo.png" />
-    <Content Include="imagenes\X.png" />
+    <Content Include="imagenes\Circulo.jpg" />
+    <Content Include="imagenes\Equis.jpg" />
     <Content Include="index.html" />
     <Content Include="main.css" />
     <Content Include="main.js" />
